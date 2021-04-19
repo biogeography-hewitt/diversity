@@ -14256,16 +14256,15 @@ a.anchor-link {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#Installing and calling libraries</span>
-<span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;vegan&quot;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">vegan</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;vegan&quot;</span><span class="p">)</span> <span class="c1">#Installing the &#39;vegan&#39; package to run the diversity analysis</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">vegan</span><span class="p">)</span> <span class="c1">#calling the &#39;vegan&#39; package into this notebook</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span> <span class="c1">#calling the &#39;dplyr&#39; package to do data cleaning functions</span>
 </pre></div>
 
      </div>
@@ -14273,59 +14272,15 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>Installing package into ‘/home/jupyter/R/x86_64-pc-linux-gnu-library/4.0’
-(as ‘lib’ is unspecified)
-
-Loading required package: permute
-
-Loading required package: lattice
-
-This is vegan 2.5-7
-
-
-Attaching package: ‘dplyr’
-
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#reading in and examining the CSV file. </span>
-<span class="n">dat</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;karakoram.csv&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
-<span class="nf">str</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> <span class="c1">#Here you see some of the values are not numeric</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">dat</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;karakoram.csv&quot;</span><span class="p">)</span> <span class="c1">#reading in and examining the CSV file</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> <span class="c1">#Taking a look at the data</span>
+<span class="nf">str</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> <span class="c1">#This function allows you to look at structure of the object, and here you see some of the values are &#39;int&#39; not numeric (&#39;num&#39;)</span>
 </pre></div>
 
      </div>
@@ -14483,11 +14438,10 @@ The following objects are masked from ‘package:base’:
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#Removing the first column with the site names because later analysis needs all the values to be numeric</span>
-<span class="n">dat</span><span class="o">$</span><span class="n">X0</span> <span class="o">&lt;-</span> <span class="kc">NULL</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">dat</span><span class="o">$</span><span class="n">X0</span> <span class="o">&lt;-</span> <span class="kc">NULL</span> <span class="c1">#Removing the first column with the site names because later analysis needs all the values to be numeric</span>
 <span class="n">dat</span><span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="n">as.numeric</span><span class="p">)</span> <span class="c1">#changing all the values to numeric values</span>
 </pre></div>
 
@@ -14496,13 +14450,13 @@ The following objects are masked from ‘package:base’:
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">dat</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> <span class="c1">#setting the data as a dataframe</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">dat</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> <span class="c1">#setting the data as a tabular dataframe</span>
 </pre></div>
 
      </div>
@@ -14510,50 +14464,16 @@ The following objects are masked from ‘package:base’:
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<table>
-<caption>A data.frame: 4 × 132</caption>
-<thead>
-	<tr><th></th><th scope=col>Aconitum.heterophyllum</th><th scope=col>Aconitum.myosotis</th><th scope=col>Aconogonon.alpinum</th><th scope=col>Adiantum.sp.</th><th scope=col>Alchemella.ypsilotoma</th><th scope=col>Allardia.stoliczkae</th><th scope=col>Allium.carolinianum</th><th scope=col>Anaphalis.nepalensis</th><th scope=col>Androsace.baltistanica</th><th scope=col>Androsace.himalaica</th><th scope=col>⋯</th><th scope=col>Swertia.cordata</th><th scope=col>Swertia.sp.</th><th scope=col>Tanacetum.falconeri</th><th scope=col>Tanacetum.gracile</th><th scope=col>Taraxacum.offionalis</th><th scope=col>Thalictrum.sp.</th><th scope=col>Thlaspi.andersonii</th><th scope=col>Thlaspi.cochlearioides</th><th scope=col>Viola.rupestris</th><th scope=col>White.Queen.anne.s.Lace</th></tr>
-	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>⋯</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
-<tbody>
-	<tr><th scope=row>1</th><td>1.5</td><td>0.0</td><td>30.5</td><td>0</td><td>0</td><td>0.0</td><td> 0</td><td>13.0</td><td>0</td><td> 0</td><td>⋯</td><td>0</td><td>1.5</td><td> 0.0</td><td>0.0</td><td> 1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>2</th><td>1.0</td><td>0.0</td><td> 9.0</td><td>0</td><td>0</td><td>0.0</td><td>28</td><td> 0.0</td><td>0</td><td>17</td><td>⋯</td><td>1</td><td>1.0</td><td>12.0</td><td>0.0</td><td> 3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td></tr>
-	<tr><th scope=row>3</th><td>0.0</td><td>2.5</td><td> 0.0</td><td>0</td><td>0</td><td>1.5</td><td> 1</td><td> 1.5</td><td>1</td><td> 0</td><td>⋯</td><td>0</td><td>0.0</td><td> 1.0</td><td>0.0</td><td>10</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>4</th><td>0.0</td><td>0.0</td><td> 1.0</td><td>1</td><td>0</td><td>0.0</td><td> 1</td><td>15.0</td><td>0</td><td> 0</td><td>⋯</td><td>0</td><td>0.0</td><td> 0.5</td><td>0.5</td><td> 8</td><td>4</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#Running the &#39;vegan&#39; package</span>
-<span class="nf">data</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
-<span class="n">shannon</span> <span class="o">&lt;-</span> <span class="nf">diversity</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="s">&quot;shannon&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#Running the diversity function within the &#39;vegan&#39; package</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span> 
+<span class="n">shannon</span> <span class="o">&lt;-</span> <span class="nf">diversity</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="s">&quot;shannon&quot;</span><span class="p">)</span> <span class="c1">#Using the &#39;diversity&#39; function, different diversity indices could be calculated (eg. Shannon&#39;s, Simpsons)</span>
+<span class="n">shannon</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">shannon</span><span class="p">)</span> <span class="c1">#Structuring the results into a tabular dataframe again</span>
 <span class="n">shannon</span>
 </pre></div>
 
@@ -14588,48 +14508,6 @@ The following objects are masked from ‘package:base’:
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>3.11353443924088</li><li>3.13740093379709</li><li>3.01144553866263</li><li>2.72919870099183</li></ol>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">shannon</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table>
 <caption>A data.frame: 4 × 1</caption>
 <thead>
@@ -14655,10 +14533,11 @@ The following objects are masked from ‘package:base’:
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">sitename</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Baumharel&quot;</span><span class="p">,</span> <span class="s">&quot;Deosai Top&quot;</span><span class="p">,</span> <span class="s">&quot;Mir Khun&quot;</span><span class="p">,</span> <span class="s">&quot;Thalle Happen&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#Binding the site names to their associated Shannon&#39;s index as they were removed earlier</span>
+<span class="n">sitename</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Baumharel&quot;</span><span class="p">,</span> <span class="s">&quot;Deosai Top&quot;</span><span class="p">,</span> <span class="s">&quot;Mir Khun&quot;</span><span class="p">,</span> <span class="s">&quot;Thalle Happen&quot;</span><span class="p">)</span>
 <span class="n">shannon</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">sitename</span><span class="p">,</span> <span class="n">shannon</span><span class="p">)</span>
 <span class="n">shannon</span>
 </pre></div>
@@ -14682,15 +14561,16 @@ The following objects are masked from ‘package:base’:
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table>
-<caption>A matrix: 4 × 2 of type chr</caption>
+<caption>A data.frame: 4 × 2</caption>
 <thead>
 	<tr><th scope=col>sitename</th><th scope=col>shannon</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>Baumharel    </td><td>3.11353443924088</td></tr>
-	<tr><td>Deosai Top   </td><td>3.13740093379709</td></tr>
-	<tr><td>Mir Khun     </td><td>3.01144553866263</td></tr>
-	<tr><td>Thalle Happen</td><td>2.72919870099183</td></tr>
+	<tr><td>Baumharel    </td><td>3.113534</td></tr>
+	<tr><td>Deosai Top   </td><td>3.137401</td></tr>
+	<tr><td>Mir Khun     </td><td>3.011446</td></tr>
+	<tr><td>Thalle Happen</td><td>2.729199</td></tr>
 </tbody>
 </table>
 
@@ -14700,20 +14580,6 @@ The following objects are masked from ‘package:base’:
 
 </div>
 
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div>
